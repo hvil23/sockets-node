@@ -1,1 +1,1 @@
-## Node project of sockets use
+## Node project of sockets use with stacks tickets example

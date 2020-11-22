@@ -1,34 +1,25 @@
-// Use internal library of node
-const path = require('path');
-const http = require('http');
-
-// User external library
 const express = require('express');
 const socketIO = require('socket.io');
+const http = require('http');
 
-// Declare app for express use
+const path = require('path');
+
 const app = express();
-
-// Define instance of server
 let server = http.createServer(app);
 
-// Declare public path for static public content
-const publicPath = path.resolve(__dirname,'../public');
-
-// Use middleware in app for access public to content in path defined
-app.use(express.static(publicPath));
-
-// Declare port for launch service
+const publicPath = path.resolve(__dirname, '../public');
 const port = process.env.PORT || 3000;
 
-// Comunication bidirectional active with front
+app.use(express.static(publicPath));
+
+// IO = esta es la comunicacion del backend
 module.exports.io = socketIO(server);
+require('./sockets/socket');
 
-require('./sockets/socket_server');
+server.listen(port, (err) => {
 
-// Launch service on defined port an execute exception if error
-server.listen(port,(err) => {
     if (err) throw new Error(err);
 
-    console.log(`Server run in port ${port}`);
+    console.log(`Servidor corriendo en puerto ${ port }`);
+
 });
