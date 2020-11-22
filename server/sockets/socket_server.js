@@ -20,12 +20,14 @@ io.on('connection', (client) => {
     client.on('sendMessage', (message,callback) => {
         console.log('from client: ',message);
 
-        client.broadcast.emit('sendMessage',message);
+        client.broadcast.emit('sendMessageServer',message);
 
-        if (message.user){
-            callback({ok:true});
-        }else{
-            callback({ok:false});
+        if (callback){
+            if (message.user){
+                callback({ok:true});
+            }else{
+                callback({ok:false});
+            }
         }
 
     });

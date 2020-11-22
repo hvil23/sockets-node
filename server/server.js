@@ -24,7 +24,7 @@ const port = process.env.PORT || 3000;
 // Comunication bidirectional active with front
 module.exports.io = socketIO(server);
 
-require('./sockets/socket');
+require('./sockets/socket_server');
 
 // Launch service on defined port an execute exception if error
 server.listen(port,(err) => {
